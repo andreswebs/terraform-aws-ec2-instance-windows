@@ -32,7 +32,7 @@ resource "aws_ssm_document" "ad_join_domain" {
 
 resource "aws_ssm_association" "this" {
   count = local.has_ad_domain_id ? 1 : 0
-  name  = aws_ssm_document.ad_join_domain.name
+  name  = aws_ssm_document.ad_join_domain[0].name
   targets {
     key    = "InstanceIds"
     values = [aws_instance.this.id]
